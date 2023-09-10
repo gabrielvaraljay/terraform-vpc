@@ -9,5 +9,5 @@ variable "vpc-cidr"{
 # Give project a name
 variable "project" {
     type = string
-    default = "wordpress"
+    default = "apache"
 }

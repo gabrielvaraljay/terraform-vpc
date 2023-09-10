@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
 }
 
 # Create Public Subnet 1
-resource "aws_subnet" "public-subnet-1" {
+resource "aws_subnet" "public_subnet_1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.0.0/20"
   availability_zone = "eu-west-2a"
@@ -19,7 +19,7 @@ resource "aws_subnet" "public-subnet-1" {
 }
 
 # Create Public Subnet 2
-resource "aws_subnet" "public-subnet-2" {
+resource "aws_subnet" "public_subnet_2" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.16.0/20"
   availability_zone = "eu-west-2b"
@@ -30,7 +30,7 @@ resource "aws_subnet" "public-subnet-2" {
 }
 
 # Create Public Subnet 3
-resource "aws_subnet" "public-subnet-3" {
+resource "aws_subnet" "public_subnet_3" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.32.0/20"
   availability_zone = "eu-west-2c"
@@ -65,17 +65,17 @@ resource "aws_route_table" "main" {
 
 # Associate the public subnet to the public route table
 resource "aws_route_table_association" "public-subnet-1" {
-  subnet_id      = aws_subnet.public-subnet-1.id
+  subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.main.id
 }
 
 resource "aws_route_table_association" "public-subnet-2" {
-  subnet_id      = aws_subnet.public-subnet-2.id
+  subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.main.id
 }
 
 resource "aws_route_table_association" "public-subnet-3" {
-  subnet_id      = aws_subnet.public-subnet-3.id
+  subnet_id      = aws_subnet.public_subnet_3.id
   route_table_id = aws_route_table.main.id
 }
 
@@ -125,7 +125,7 @@ resource "aws_eip" "nat" {
 #Create NAT Gateway
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public-subnet-1.id
+  subnet_id     = aws_subnet.public_subnet_1.id
 
   tags = {
     Name = "${var.project}-nat-gateway"
